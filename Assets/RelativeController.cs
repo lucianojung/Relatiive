@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = System.Diagnostics.Debug;
 
 public class RelativeController : MonoBehaviour
 {
@@ -25,13 +26,23 @@ public class RelativeController : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Ended)
             {
-                Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                RaycastHit vHit;
-                if(Physics.Raycast(ray.origin,ray.direction, out vHit))
-                {
-                    OnRelativeTapped(vHit.collider.gameObject);
-                }
+                HandleTap(touch.position);
             }
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            HandleTap(Input.mousePosition);
+        }
+    }
+
+    private void HandleTap(Vector2 position)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(position);
+        RaycastHit vHit;
+        if(Physics.Raycast(ray.origin,ray.direction, out vHit))
+        {
+            OnRelativeTapped(vHit.collider.gameObject);
         }
     }
 

@@ -17,8 +17,6 @@ public class AreaControl : MonoBehaviour, IScrollHandler
     private float maxZoom = 5f;
     
     Vector3 touchStart;
-    public float zoomOutMin = 1;
-    public float zoomOutMax = 8;
 
     private void Awake()
     {

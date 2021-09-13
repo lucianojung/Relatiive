@@ -431,8 +431,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoomSpeed: 0.001
   maxZoom: 5
-  zoomOutMin: 1
-  zoomOutMax: 8
 --- !u!114 &99635108
 MonoBehaviour:
   m_ObjectHideFlags: 0
