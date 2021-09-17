@@ -1,7 +1,4 @@
 
-# Todo
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -23,7 +20,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/lucianojung/Relatiive">
-    <img src="Assets/Images/App-Symbole_Relatiive_3.png" alt="Logo" width="102" height="50">
+    <img src="Assets/Images/VorstellungsgrafikRelatiive_3.png" alt="Logo" width="512" height="250">
   </a>
 
   <h3 align="center">Relatiive</h3>
@@ -168,9 +165,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Luciano Jung - [@LucianoJung2](https://twitter.com/LucianoJung2) - LucianoJ@posteo.de
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/lucianojung/Relatiive](https://github.com/lucianojung/Relatiive)
 
 
 
@@ -194,16 +191,16 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/lucianojung/Relatiive.svg?style=for-the-badge
+[contributors-url]: https://github.com/lucianojung/Relatiive/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/lucianojung/Relatiive.svg?style=for-the-badge
+[forks-url]: https://github.com/lucianojung/Relatiive/network/members
+[stars-shield]: https://img.shields.io/github/stars/lucianojung/Relatiive.svg?style=for-the-badge
+[stars-url]: https://github.com/lucianojung/Relatiive/stargazers
+[issues-shield]: https://img.shields.io/github/issues/lucianojung/Relatiive.svg?style=for-the-badge
+[issues-url]: https://github.com/lucianojung/Relatiive/issues
+[license-shield]: https://img.shields.io/github/license/lucianojung/Relatiive.svg?style=for-the-badge
+[license-url]: https://github.com/lucianojung/Relatiive/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[linkedin-url]: https://www.linkedin.com/in/luciano-jung-3783a31a0/
+[product-screenshot]: Assets/Images/familyTreeBackground.png
