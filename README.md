@@ -23,7 +23,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/lucianojung/Relatiive">
-    <img src="Assests/Images/App-Symbole_Relatiive_3.png" alt="Logo" width="102" height="50">
+    <img src="Assets/Images/App-Symbole_Relatiive_3.png" alt="Logo" width="102" height="50">
   </a>
 
   <h3 align="center">Relatiive</h3>
