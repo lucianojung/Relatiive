@@ -8,12 +8,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 <p align="center">
-    <a href="https://github.com/lucianojung/Relatiive/graphs/contributors" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/lucianojung/Relatiive" /></a>
-    <a href="#backers" alt="Backers on Open Collective">
-        <img src="https://img.shields.io/opencollective/backers/shields" /></a>
-    <a href="#sponsors" alt="Sponsors on Open Collective">
-        <img src="https://img.shields.io/opencollective/sponsors/shields" /></a>
+    <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/lucianojung/Relatiive">
     <a href="https://github.com/lucianojung/Relatiive/pulse" alt="Activity">
         <img src="https://img.shields.io/github/commit-activity/m/lucianojung/Relatiive" /></a>
     <a href="https://circleci.com/gh/lucianojung/Relatiive/tree/master">
