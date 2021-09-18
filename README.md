@@ -7,17 +7,6 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-![License](https://img.shields.io/github/license/lucianojung/Relatiive)
-![Code size in bytes](https://img.shields.io/github/languages/code-size/lucianojung/Relatiive)
-![Plattforms](https://img.shields.io/badge/Plattforms-Android/iOS/Web-success)
-
-![Contributors](https://img.shields.io/github/contributors/lucianojung/Relatiive)
-![Commit activity](https://img.shields.io/github/commit-activity/m/lucianojung/Relatiive)
-![Issues](https://img.shields.io/github/issues/lucianojung/Relatiive)
-![Pull requests](https://img.shields.io/github/issues-pr/lucianojung/Relatiive)
-![Last commit](https://img.shields.io/github/last-commit/lucianojung/relatiive)
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -40,7 +29,19 @@
     ·
     <a href="https://github.com/lucianojung/Relatiive">Request Feature</a>
   </p>
+  
+  <p align="center">
+    <img alt="License" src="https://img.shields.io/github/license/lucianojung/Relatiive">
+    <img alt="Code size in bytes" src="https://img.shields.io/github/languages/code-size/lucianojung/Relatiive">
+    <img alt="Plattforms" src="https://img.shields.io/badge/Plattforms-Android/iOS/Web-success">
+    <img alt="Contributors" src="https://img.shields.io/github/contributors/lucianojung/Relatiive">
+    <img alt="Commit activity" src="https://img.shields.io/github/commit-activity/m/lucianojung/Relatiive">
+    <img alt="Issues" src="https://img.shields.io/github/issues/lucianojung/Relatiive">
+    <img alt="Pull requests" src="https://img.shields.io/github/issues-pr/lucianojung/Relatiive">
+    <img alt="Last commit" src="https://img.shields.io/github/last-commit/lucianojung/relatiive">
+  </p>
 </p>
+
 
 
 
