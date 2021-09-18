@@ -93,6 +93,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Position: 0
   text: {fileID: 5249002012995545300}
+  image: {fileID: 5249002014074953521}
+  children: []
+  c1: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  c2: {r: 1, g: 0, b: 0, a: 1}
+  lengthOfLineRenderer: 20
 --- !u!65 &5771536683387863736
 BoxCollider:
   m_ObjectHideFlags: 0
