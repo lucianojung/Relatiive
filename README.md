@@ -7,8 +7,9 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+![GitHub contributors](https://img.shields.io/github/contributors/lucianojung/Relatiive)
+
 <p align="center">
-    <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/lucianojung/Relatiive">
     <a href="https://github.com/lucianojung/Relatiive/pulse" alt="Activity">
         <img src="https://img.shields.io/github/commit-activity/m/lucianojung/Relatiive" /></a>
     <a href="https://circleci.com/gh/lucianojung/Relatiive/tree/master">
