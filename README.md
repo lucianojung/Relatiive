@@ -7,23 +7,15 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-![GitHub contributors](https://img.shields.io/github/contributors/lucianojung/Relatiive)
+![License](https://img.shields.io/github/license/lucianojung/Relatiive)
+![Code size in bytes](https://img.shields.io/github/languages/code-size/lucianojung/Relatiive)
+![Plattforms](https://img.shields.io/badge/Plattforms-Android/iOS/Web-success)
 
-<p align="center">
-    <a href="https://github.com/lucianojung/Relatiive/pulse" alt="Activity">
-        <img src="https://img.shields.io/github/commit-activity/m/lucianojung/Relatiive" /></a>
-    <a href="https://circleci.com/gh/lucianojung/Relatiive/tree/master">
-        <img src="https://img.shields.io/circleci/project/github/lucianojung/Relatiive/master" alt="build status"></a>
-    <a href="https://circleci.com/gh/lucianojung/daily-tests">
-        <img src="https://img.shields.io/circleci/project/github/lucianojung/daily-tests?label=service%20tests"
-            alt="service-test status"></a>
-    <a href="https://coveralls.io/github/lucianojung/Relatiive">
-        <img src="https://img.shields.io/coveralls/github/lucianojung/Relatiive"
-            alt="coverage"></a>
-    <a href="https://lgtm.com/projects/g/lucianojung/Relatiive/alerts/">
-        <img src="https://img.shields.io/lgtm/alerts/g/lucianojung/Relatiive"
-            alt="Total alerts"/></a>
-</p>
+![Contributors](https://img.shields.io/github/contributors/lucianojung/Relatiive)
+![Commit activity](https://img.shields.io/github/commit-activity/m/lucianojung/Relatiive)
+![Issues](https://img.shields.io/github/issues/lucianojung/Relatiive)
+![Pull requests](https://img.shields.io/github/issues-pr/lucianojung/Relatiive)
+![Last commit](https://img.shields.io/github/last-commit/lucianojung/relatiive)
 
 
 
