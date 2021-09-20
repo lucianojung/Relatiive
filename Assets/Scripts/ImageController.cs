@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ImageController : MonoBehaviour
 {
+    private LineRenderer lineRenderer;
     public int Position; //todo make this obsolete
     public Text text;
     private Image image;
@@ -16,46 +17,35 @@ public class ImageController : MonoBehaviour
     // and animates it.
 
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         image = GetComponentInChildren<Image>();
+        lineRenderer = GetComponent<LineRenderer>();
+        
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, transform.position);
+        lineRenderer.SetPosition(2, transform.position);
+        lineRenderer.SetPosition(3, transform.position);
+        lineRenderer.SetPosition(4, transform.position);
+    }
 
-        Vector3 averagePosition = Vector3.one;
+    void Start()
+    {
+        Vector3 averagePosition = Vector3.zero;
         children.ForEach(child => averagePosition += child.GetPosition());
         averagePosition /= children.Count;
-
+        
         if (children.Count >= 1)
         {
-            LineRenderer lineRendererTest = CreateLineRenderer(3);
-            lineRendererTest.SetPosition(0, transform.position);
-            lineRendererTest.SetPosition(1, new Vector3(averagePosition.x, transform.position.y, -10));
-            lineRendererTest.SetPosition(2, new Vector3(averagePosition.x, transform.position.y  - 1));
+            lineRenderer.SetPosition(3, new Vector3(averagePosition.x, transform.position.y));
+            lineRenderer.SetPosition(4, new Vector3(averagePosition.x, transform.position.y  - 1));
             
             foreach (ImageController child in children)
             {
-                LineRenderer lineRenderer = CreateLineRenderer(3);
                 child.SetRelativeParent(this);
-                lineRenderer.SetPosition(0, new Vector3(averagePosition.x, transform.position.y  - 1));
-                lineRenderer.SetPosition(1, new Vector3(child.GetPosition().x, transform.position.y  - 1));
-                lineRenderer.SetPosition(2, child.GetPosition());
             }
         }
-    }
-
-    private LineRenderer CreateLineRenderer(int positionCount)
-    {
-        LineRenderer lineRenderer = new GameObject().AddComponent<LineRenderer>();
-        lineRenderer.positionCount = positionCount;
-        lineRenderer.transform.position = Vector3.one;
-        lineRenderer.transform.parent = transform;
-        lineRenderer.gameObject.name = "LineRenderer";
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        lineRenderer.widthMultiplier = 0.1f;
-        lineRenderer.SetWidth(0.1f, 0.1f);
-
-        lineRenderer.startColor = Color.blue;
-        lineRenderer.endColor = Color.blue;
-        return lineRenderer;
     }
 
     public void SetText(string name)
@@ -67,6 +57,14 @@ public class ImageController : MonoBehaviour
     public void SetRelativeParent(ImageController parent)
     {
         _parents.Add(parent);
+        
+        Vector3 averagePosition = Vector3.zero;
+        _parents[0].children.ForEach(siblings => averagePosition += siblings.GetPosition());
+        averagePosition /= _parents[0].children.Count;
+        
+        print(lineRenderer);
+        lineRenderer.SetPosition(0, new Vector3(transform.position.x, _parents[0].GetPosition().y  - 1));
+        lineRenderer.SetPosition(1, new Vector3(averagePosition.x, _parents[0].GetPosition().y - 1));
     }
 
     public Vector3 GetPosition()
