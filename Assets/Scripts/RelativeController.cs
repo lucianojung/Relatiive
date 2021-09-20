@@ -56,8 +56,7 @@ public class RelativeController : MonoBehaviour
         }
         
         // highlight tapped button
-        Image image = tappedRelative.GetComponent<Image>();
-        image.color = Color.cyan;
+        tappedRelative.GetComponent<ImageController>().SelectRelative();
     }
 
     private void fillRelativesNames()
