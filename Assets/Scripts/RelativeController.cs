@@ -1,22 +1,152 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
-using Debug = System.Diagnostics.Debug;
 
 public class RelativeController : MonoBehaviour
 {
-    private ImageController[] _relatives;
+    private string defaultName = "Relatiive";
+    public ImageController startRelative;
 
-    private List<Dictionary<int, string>> relativesNames = new List<Dictionary<int, string>>();
+    private ImageController _currentRelative;
+
+    #region define relative names
+
+    private Dictionary<int, Dictionary<int, string>> affinityMaleNames = new Dictionary<int, Dictionary<int, string>>()
+    {
+        [-4] = new Dictionary<int, string>
+        {
+            [6] = "Ururgroßneffe", [8] = "Ururgroßneffe 2. Grades", [8] = "Ururgroßneffe 3. Grades"
+        },
+        [-3] = new Dictionary<int, string>
+            {[5] = "Urgroßneffe", [7] = "Urgroßneffe 2. Grades", [9] = "Urgroßneffe 3. Grades"},
+        [-2] = new Dictionary<int, string>
+            {[2] = "Schwiegerenkel", [4] = "Großneffe", [6] = "Großneffe 2. Grades", [8] = "Großneffe 3. Grades"},
+        [-1] = new Dictionary<int, string>
+        {
+            [1] = "Schwiegersohn", [3] = "Neffe", [5] = "Neffe 2. Grades", [7] = "Neffe 3. Grades",
+            [9] = "Neffe 4. Grades"
+        },
+        [0] = new Dictionary<int, string>
+            {[0] = "Ehemann", [2] = "Schwager"},
+        [1] = new Dictionary<int, string>
+            {[1] = "Schwiegervater", [3] = "Onkel", [5] = "Onkel 2. Grades", [7] = "Onkel 3. Grades"},
+        [2] = new Dictionary<int, string>
+            {[2] = "Schwiegergroßvater", [4] = "Großonkel", [6] = "Großonkel 2. Grades", [8] = "Großonkel 3. Grades"},
+        [3] = new Dictionary<int, string>
+            {[5] = "Urgroßonkel", [7] = "Urgroßonkel 2. Grades", [9] = "Urgroßonkel 3. Grades"},
+        [4] = new Dictionary<int, string>
+            {[6] = "Ururgroßonkel", [8] = "Ururgroßonkel 2. Grades"},
+    };
+
+    private Dictionary<int, Dictionary<int, string>> affinityFemaleNames =
+        new Dictionary<int, Dictionary<int, string>>()
+        {
+            [-4] = new Dictionary<int, string>
+            {
+                [6] = "Ururgroßnichte", [8] = "Ururgroßnichte 2. Grades",
+                [8] = "Ururgroßnichte 3. Grades"
+            },
+
+            [-3] = new Dictionary<int, string>
+                {[5] = "Urgroßnichte", [7] = "Urgroßnichte 2. Grades", [9] = "Urgroßnichte 3. Grades"},
+
+            [-2] = new Dictionary<int, string>
+            {
+                [2] = "Schwiegerenkelin", [4] = "Großnichte", [6] = "Großnichte 2. Grades", [8] = "Großnichte 3. Grades"
+            },
+
+            [-1] = new Dictionary<int, string>
+            {
+                [1] = "Schwiegertochter", [3] = "Nichte", [5] = "Nichte 2. Grades", [7] = "Nichte 3. Grades",
+                [9] = "Nichte 4. Grades"
+            },
+
+            [0] = new Dictionary<int, string>
+                {[0] = "Ehefrau", [2] = "Schwägerin"},
+
+            [1] = new Dictionary<int, string>
+                {[1] = "Schwiegermutter", [3] = "Tante", [5] = "Tante 2. Grades", [7] = "Tante 3. Grades"},
+
+            [2] = new Dictionary<int, string>
+            {
+                [2] = "Schwiegergroßmutter", [4] = "Großtante", [6] = "Großtante 2. Grades", [8] = "Großtante 3. Grades"
+            },
+
+            [3] = new Dictionary<int, string>
+                {[5] = "Urgroßtante", [7] = "Urgroßtante 2. Grades", [9] = "Urgroßtante 3. Grades"},
+
+            [4] = new Dictionary<int, string>
+                {[6] = "Ururgroßtante", [8] = "Ururgroßtante 2. Grades"}
+        };
+
+    private Dictionary<int, Dictionary<int, string>> maleNames = new Dictionary<int, Dictionary<int, string>>()
+    {
+        [-4] = new Dictionary<int, string>
+        {
+            [4] = "Ururenkel", [6] = "Ururgroßneffe", [8] = "Ururgroßneffe 2. Grades", [8] = "Ururgroßneffe 3. Grades"
+        },
+        [-3] = new Dictionary<int, string>
+            {[3] = "Urenkel", [5] = "Urgroßneffe", [7] = "Urgroßneffe 2. Grades", [9] = "Urgroßneffe 3. Grades"},
+        [-2] = new Dictionary<int, string>
+            {[2] = "Enkel", [4] = "Großneffe", [6] = "Großneffe 2. Grades", [8] = "Großneffe 3. Grades"},
+        [-1] = new Dictionary<int, string>
+            {[1] = "Sohn", [3] = "Neffe", [5] = "Neffe 2. Grades", [7] = "Neffe 3. Grades", [9] = "Neffe 4. Grades"},
+        [0] = new Dictionary<int, string>
+            {[0] = "Ich", [2] = "Bruder", [4] = "Cousin", [6] = "Cousin 2. Grades", [8] = "Cousin 3. Grades"},
+        [1] = new Dictionary<int, string>
+            {[1] = "Vater", [3] = "Onkel", [5] = "Onkel 2. Grades", [7] = "Onkel 3. Grades"},
+        [2] = new Dictionary<int, string>
+            {[2] = "Großvater", [4] = "Großonkel", [6] = "Großonkel 2. Grades", [8] = "Großonkel 3. Grades"},
+        [3] = new Dictionary<int, string>
+            {[3] = "Urgroßvater", [5] = "Urgroßonkel", [7] = "Urgroßonkel 2. Grades", [9] = "Urgroßonkel 3. Grades"},
+        [4] = new Dictionary<int, string>
+            {[4] = "Ururgroßvater", [6] = "Ururgroßonkel", [8] = "Ururgroßonkel 2. Grades"},
+    };
+
+    private Dictionary<int, Dictionary<int, string>> femaleNames = new Dictionary<int, Dictionary<int, string>>()
+    {
+        [-4] = new Dictionary<int, string>
+        {
+            [4] = "Ururenkelin", [6] = "Ururgroßnichte", [8] = "Ururgroßnichte 2. Grades",
+            [8] = "Ururgroßnichte 3. Grades"
+        },
+
+        [-3] = new Dictionary<int, string>
+            {[3] = "Urenkelin", [5] = "Urgroßnichte", [7] = "Urgroßnichte 2. Grades", [9] = "Urgroßnichte 3. Grades"},
+
+        [-2] = new Dictionary<int, string>
+            {[2] = "Enkelin", [4] = "Großnichte", [6] = "Großnichte 2. Grades", [8] = "Großnichte 3. Grades"},
+
+        [-1] = new Dictionary<int, string>
+        {
+            [1] = "Tochter", [3] = "Nichte", [5] = "Nichte 2. Grades", [7] = "Nichte 3. Grades",
+            [9] = "Nichte 4. Grades"
+        },
+
+        [0] = new Dictionary<int, string>
+            {[0] = "Ich", [2] = "Schwester", [4] = "Cousine", [6] = "Cousine 2. Grades", [8] = "Cousine 3. Grades"},
+
+        [1] = new Dictionary<int, string>
+            {[1] = "Mutter", [3] = "Tante", [5] = "Tante 2. Grades", [7] = "Tante 3. Grades"},
+
+        [2] = new Dictionary<int, string>
+            {[2] = "Großmutter", [4] = "Großtante", [6] = "Großtante 2. Grades", [8] = "Großtante 3. Grades"},
+
+        [3] = new Dictionary<int, string>
+            {[3] = "Urgroßmutter", [5] = "Urgroßtante", [7] = "Urgroßtante 2. Grades", [9] = "Urgroßtante 3. Grades"},
+
+        [4] = new Dictionary<int, string>
+            {[4] = "Ururgroßmutter", [6] = "Ururgroßtante", [8] = "Ururgroßtante 2. Grades"}
+    };
+
+    #endregion
+
 
     // Start is called before the first frame update
 
     void Start()
     {
-        fillRelativesNames();
-        _relatives = GetComponentsInChildren<ImageController>();
+        OnRelativeTapped(startRelative);
     }
 
     private void Update()
@@ -30,7 +160,7 @@ public class RelativeController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             HandleTap(Input.mousePosition);
         }
@@ -40,255 +170,117 @@ public class RelativeController : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(position);
         RaycastHit vHit;
-        if(Physics.Raycast(ray.origin,ray.direction, out vHit))
+        if (Physics.Raycast(ray.origin, ray.direction, out vHit))
         {
-            OnRelativeTapped(vHit.collider.gameObject);
+            OnRelativeTapped(vHit.collider.gameObject.GetComponent<ImageController>());
         }
     }
 
-    public void OnRelativeTapped(GameObject tappedRelative)
+    public void OnRelativeTapped(ImageController tappedRelative)
     {
-        ImageController imageController = tappedRelative.GetComponent<ImageController>();
-        Dictionary<int, string> names = relativesNames[imageController.Position];
-        foreach (ImageController relative in _relatives)
+        // Set default names
+        ImageController[] relatives = GetComponentsInChildren<ImageController>();
+        foreach (ImageController controller in relatives)
         {
-            relative.UnselectRelative(names[relative.Position]);
+            controller.ResetRelative(defaultName);
         }
-        
-        // highlight tapped button
-        tappedRelative.GetComponent<ImageController>().SelectRelative();
+
+        _currentRelative = tappedRelative;
+        _currentRelative.SelectRelative("Ich");
+        setRelativesNames(0, 0, tappedRelative, false);
     }
 
-    private void fillRelativesNames()
+    private void setRelativesNames(int generation, int level, ImageController currentRelative, bool affinity)
     {
-        // relativesNames.Add(new Dictionary<int, string>
-        // {
-        //     {0, ""}, {1, ""}, {2, ""}, {3, ""}, // wmwm
-        //     {4, ""}, {5, ""}, // wm
-        //     {6, ""}, {7, ""}, {8, ""}, {9, ""}, {10, ""}, //wmmwm
-        //     {11, ""}, {12, ""}, {13, ""}, {14, ""}, {15, ""}, {16, ""}, {17, ""}, //mwwmwmw
-        //     {18, ""}, {19, ""}, {20, ""}, {21, ""}, //wmwm
-        // });
-
-        // 1. Row
-        relativesNames.Add(new Dictionary<int, string>
+        List<ImageController> childrenToSearch = new List<ImageController>();
+        List<ImageController> parentsToSearch = new List<ImageController>();
+        List<ImageController> affinitiesToSearch = new List<ImageController>();
+        currentRelative.children.ForEach(child =>
         {
-            {0, "Ich"}, {1, "Ehemann"}, {2, "Gegenschwiegermutter"}, {3, "Gegenschwiegervater"}, // wmwm
-            {4, "Tochter"}, {5, "Schwiegersohn"}, // wm
-            {6, "Schwiegerenkelin"}, {7, "Enkel"}, {8, "Enkel"}, {9, "Enkelin"}, {10, "Schwiegerenkel"}, //wmmwm
-            {11, "Urenkel"}, {12, "Urenkelin"}, {13, "Urenkelin"}, {14, "Schwiegerurenkel"}, {15, "Schwiegerurenkelin"},
-            {16, "Urenkel"}, {17, "Urenkelin"}, //mwwmwmw
-            {18, "Ururenkelin"}, {19, "Ururenkel"}, {20, "Ururenkelin"}, {21, "Ururenkel"}, //wmwm
+            if (child.MarkedDown)
+            {
+                string name = GetNameByLevelAndGeneration(child, generation - 1, level + 1, affinity);
+                if (name != defaultName)
+                {
+                    child.UnselectRelative(name);
+                    childrenToSearch.Add(child);
+                }
+            }
+        });
+        currentRelative.Parents.ForEach(parent =>
+        {
+            if (parent.MarkedDown)
+            {
+                string name = GetNameByLevelAndGeneration(parent, generation + 1, level + 1, affinity);
+                if (name != defaultName)
+                {
+                    parent.UnselectRelative(name);
+                    parentsToSearch.Add(parent);
+                }
+            }
         });
 
-        relativesNames.Add(new Dictionary<int, string>
+        if (!affinity)
         {
-            {0, "Ehefrau"}, {1, "Ich"}, {2, "Gegenschwiegermutter"}, {3, "Gegenschwiegervater"}, // wmwm
-            {4, "Tochter"}, {5, "Schwiegersohn"}, // wm
-            {6, "Schwiegerenkelin"}, {7, "Enkel"}, {8, "Enkel"}, {9, "Enkelin"}, {10, "Schwiegerenkel"}, //wmmwm
-            {11, "Urenkel"}, {12, "Urenkelin"}, {13, "Urenkelin"}, {14, "Schwiegerurenkel"}, {15, "Schwiegerurenkelin"},
-            {16, "Urenkel"}, {17, "Urenkelin"}, //mwwmwmw
-            {18, "Ururenkelin"}, {19, "Ururenkel"}, {20, "Ururenkelin"}, {21, "Ururenkel"}, //wmwm
-        });
+            currentRelative.Partners.ForEach(partner =>
+            {
+                if (partner.MarkedDown)
+                {
+                    string name = GetNameByLevelAndGeneration(partner, generation, level, true);
+                    if (name != defaultName)
+                    {
+                        partner.UnselectRelative(name);
+                        affinitiesToSearch.Add(partner);
+                    }
+                }
+            });
+        }
 
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Gegenschwiegermutter"}, {1, "Gegenschwiegervater"}, {2, "Ich"}, {3, "Ehemann"}, // wmwm
-            {4, "Schwiegertochter"}, {5, "Sohn"}, // wm
-            {6, "Schwiegerenkelin"}, {7, "Enkel"}, {8, "Enkel"}, {9, "Enkelin"}, {10, "Schwiegerenkel"}, //wmmwm
-            {11, "Urenkel"}, {12, "Urenkelin"}, {13, "Urenkelin"}, {14, "Schwiegerurenkel"}, {15, "Schwiegerurenkelin"},
-            {16, "Urenkel"}, {17, "Urenkelin"}, //mwwmwmw
-            {18, "Ururenkelin"}, {19, "Ururenkel"}, {20, "Ururenkelin"}, {21, "Ururenkel"}, //wmwm
-        });
+        childrenToSearch.ForEach((child) =>
+            setRelativesNames(generation - 1, level + 1, child, affinity)
+        );
+        parentsToSearch.ForEach((parent) =>
+            setRelativesNames(generation + 1, level + 1, parent, affinity)
+        );
+        affinitiesToSearch.ForEach((parent) =>
+            setRelativesNames(generation + 1, level + 1, parent, true)
+        );
+    }
 
-        relativesNames.Add(new Dictionary<int, string>
+    private string GetNameByLevelAndGeneration(ImageController relative, int generation, int level, bool affinity)
+    {
+        switch (relative.sex)
         {
-            {0, "Gegenschwiegermutter"}, {1, "Gegenschwiegervater"}, {2, "Ich"}, {3, "Ehemann"}, // wmwm
-            {4, "Schwiegertochter"}, {5, "Sohn"}, // wm
-            {6, "Schwiegerenkelin"}, {7, "Enkel"}, {8, "Enkel"}, {9, "Enkelin"}, {10, "Schwiegerenkel"}, //wmmwm
-            {11, "Urenkel"}, {12, "Urenkelin"}, {13, "Urenkelin"}, {14, "Schwiegerurenkel"}, {15, "Schwiegerurenkelin"},
-            {16, "Urenkel"}, {17, "Urenkelin"}, //mwwmwmw
-            {18, "Ururenkelin"}, {19, "Ururenkel"}, {20, "Ururenkelin"}, {21, "Ururenkel"}, //wmwm
-        });
+            case (Sex.MALE):
+                if (!affinity)
+                {
+                    if (maleNames.ContainsKey(generation) && maleNames[generation].ContainsKey(level))
+                        return maleNames[generation][level];
+                }
+                else
+                {
+                    if (affinityMaleNames.ContainsKey(generation) && affinityMaleNames[generation].ContainsKey(level))
+                        return affinityMaleNames[generation][level];
+                }
 
-        //2. Row
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Mutter"}, {1, "Vater"}, {2, "Schiegermutter"}, {3, "Schwiegervater"}, // wmwm
-            {4, "Ich"}, {5, "Ehemann"}, // wm
-            {6, "Schwiegertochter"}, {7, "Sohn"}, {8, "Sohn"}, {9, "Tochter"}, {10, "Schwiegersohn"}, //wmmwm
-            {11, "Enkel"}, {12, "Enkelin"}, {13, "Enkelin"}, {14, "Schwiegerenkel"}, {15, "Schwiegerenkelin"},
-            {16, "Enkel"}, {17, "Enkelin"}, //mwwmwmw
-            {18, "Urenkelin"}, {19, "Urenkel"}, {20, "Urenkelin"}, {21, "Urenkel"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Schiegermutter"}, {1, "Schwiegervater"}, {2, "Mutter"}, {3, "Vater"}, // wmwm
-            {4, "Ehefrau"}, {5, "Ich"}, // wm
-            {6, "Schwiegertochter"}, {7, "Sohn"}, {8, "Sohn"}, {9, "Tochter"}, {10, "Schwiegersohn"}, //wmmwm
-            {11, "Enkel"}, {12, "Enkelin"}, {13, "Enkelin"}, {14, "Schwiegerenkel"}, {15, "Schwiegerenkelin"},
-            {16, "Enkel"}, {17, "Enkelin"}, //mwwmwmw
-            {18, "Urenkelin"}, {19, "Urenkel"}, {20, "Urenkelin"}, {21, "Urenkel"}, //wmwm
-        });
+                break;
 
-        //3. Row
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Vater der Schwiegermutter"}, {1, "Mutter der Schwiegermutter"}, {2, "Vater des Schwiegervaters"},
-            {3, "Mutter des Schwiegervaters"}, // wmwm
-            {4, "Schwiegermutter"}, {5, "Schwiegervater"}, // wm
-            {6, "Ich"}, {7, "Ehemann"}, {8, "Schwiegerbruder"}, {9, "Schwiegerschwester"},
-            {10, "Schwippschwager"}, //wmmwm
-            {11, "Sohn"}, {12, "Tochter"}, {13, "Tochter"}, {14, "Schwiegersohn"}, {15, "Schwiegernichte"},
-            {16, "Neffe"}, {17, "Nichte"}, //mwwmwmw
-            {18, "Enkelin"}, {19, "Enkel"}, {20, "Großnichte"}, {21, "Großneffe"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Großmutter"}, {1, "Großvater"}, {2, "Großmutter"}, {3, "Großvater"}, // wmwm
-            {4, "Mutter"}, {5, "Vater"}, // wm
-            {6, "Ehefrau"}, {7, "Ich"}, {8, "Bruder"}, {9, "Schwester"}, {10, "Schwiegerbruder"}, //wmmwm
-            {11, "Sohn"}, {12, "Tochter"}, {13, "Tochter"}, {14, "Schwiegersohn"}, {15, "Schwiegernichte"},
-            {16, "Neffe"}, {17, "Nichte"}, //mwwmwmw
-            {18, "Enkelin"}, {19, "Enkel"}, {20, "Großnichte"}, {21, "Großneffe"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Großmutter"}, {1, "Großvater"}, {2, "Großmutter"}, {3, "Großvater"}, // wmwm
-            {4, "Mutter"}, {5, "Vater"}, // wm
-            {6, "Schwiegerschwester"}, {7, "Bruder"}, {8, "Ich"}, {9, "Schwester"}, {10, "Schwiegerbruder"}, //wmmwm
-            {11, "Neffe"}, {12, "Nichte"}, {13, "Nichte"}, {14, "Schwiegerneffe"}, {15, "Schwiegernichte"},
-            {16, "Neffe"}, {17, "Nichte"}, //mwwmwmw
-            {18, "Großnichte"}, {19, "Großneffe"}, {20, "Großnichte"}, {21, "Großneffe"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Großmutter"}, {1, "Großvater"}, {2, "Großmutter"}, {3, "Großvater"}, // wmwm
-            {4, "Mutter"}, {5, "Vater"}, // wm
-            {6, "Schwiegerschwester"}, {7, "Bruder"}, {8, "Bruder"}, {9, "Ich"}, {10, "Ehemann"}, //wmmwm
-            {11, "Neffe"}, {12, "Nichte"}, {13, "Nichte"}, {14, "Schwiegerneffe"}, {15, "Schwiegertochter"},
-            {16, "Sohn"}, {17, "Tochter"}, //mwwmwmw
-            {18, "Großnichte"}, {19, "Großneffe"}, {20, "Enkelin"}, {21, "Enkel"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Vater der Schwiegermutter"}, {1, "Mutter der Schwiegermutter"}, {2, "Vater des Schwiegervaters"},
-            {3, "Mutter des Schwiegervaters"}, // wmwm
-            {4, "Schwiegermutter"}, {5, "Schwiegervater"}, // wm
-            {6, "Schwippschwägerin"}, {7, "Schwiegerbruder"}, {8, "Schwiegerbruder"}, {9, "Ehefrau"},
-            {10, "Ich"}, //wmmwm
-            {11, "Neffe"}, {12, "Nichte"}, {13, "Nichte"}, {14, "Schwiegerneffe"}, {15, "Schwiegertochter"},
-            {16, "Sohn"}, {17, "Tochter"}, //mwwmwmw
-            {18, "Großnichte"}, {19, "Großneffe"}, {20, "Enkelin"}, {21, "Enkel"}, //wmwm
-        });
+            case (Sex.FEMALE):
+                if (!affinity)
+                {
+                    if (femaleNames.ContainsKey(generation) && femaleNames[generation].ContainsKey(level))
+                        return femaleNames[generation][level];
+                }
+                else
+                {
+                    if (affinityFemaleNames.ContainsKey(generation) &&
+                        affinityFemaleNames[generation].ContainsKey(level))
+                        return affinityFemaleNames[generation][level];
+                }
 
-        // 4. Row
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Urgroßmutter"}, {1, "Urgroßvater"}, {2, "Urgroßmutter"}, {3, "Urgroßvater"}, // wmwm
-            {4, "Großmutter"}, {5, "Großvater"}, // wm
-            {6, "Mutter"}, {7, "Vater"}, {8, "Onkel"}, {9, "Tante"}, {10, "Onkel"}, //wmmwm
-            {11, "Ich"}, {12, "Schwester"}, {13, "Schwester"}, {14, "Schwiegerbruder"}, {15, "Schwiegercousine"},
-            {16, "Cousin"}, {17, "Cousine"}, //mwwmwmw
-            {18, "Nichte"}, {19, "Neffe"}, {20, "Nichte 2. Grades"}, {21, "Neffe 2. Grades"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Urgroßmutter"}, {1, "Urgroßvater"}, {2, "Urgroßmutter"}, {3, "Urgroßvater"}, // wmwm
-            {4, "Großmutter"}, {5, "Großvater"}, // wm
-            {6, "Mutter"}, {7, "Vater"}, {8, "Onkel"}, {9, "Tante"}, {10, "Onkel"}, //wmmwm
-            {11, "Bruder"}, {12, "Ich"}, {13, "Zwillingsschwester"}, {14, "Schwiegerbruder"}, {15, "Schwiegercousine"},
-            {16, "Cousin"}, {17, "Cousine"}, //mwwmwmw
-            {18, "Nichte"}, {19, "Neffe"}, {20, "Nichte 2. Grades"}, {21, "Neffe 2. Grades"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Urgroßmutter"}, {1, "Urgroßvater"}, {2, "Urgroßmutter"}, {3, "Urgroßvater"}, // wmwm
-            {4, "Großmutter"}, {5, "Großvater"}, // wm
-            {6, "Mutter"}, {7, "Vater"}, {8, "Onkel"}, {9, "Tante"}, {10, "Onkel"}, //wmmwm
-            {11, "Bruder"}, {12, "Zwillingsschwester"}, {13, "Ich"}, {14, "Ehemann"}, {15, "Schwiegercousine"},
-            {16, "Cousin"}, {17, "Cousine"}, //mwwmwmw
-            {18, "Tochter"}, {19, "Sohn"}, {20, "Nichte 2. Grades"}, {21, "Neffe 2. Grades"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Urgroßschwiegermutter"}, {1, "Urgroßschwiegervater"}, {2, "Urgroßschwiegermutter"},
-            {3, "Urgroßschwiegervater"}, // wmwm
-            {4, "Großschwiegermutter"}, {5, "Großschwiegervater"}, // wm
-            {6, "Schwiegermutter"}, {7, "Schwiegervater"}, {8, "Schwiegeronkel"}, {9, "Schwiegertante"},
-            {10, "Schwiegeronkel"}, //wmmwm
-            {11, "Schwiegerbruder"}, {12, "Schwiegerschwester"}, {13, "Ehefrau"}, {14, "Ich"},
-            {15, "Ehefrau meines Schwiegercousins"}, {16, "Schwiegercousin"}, {17, "Schwiegercousine"}, //mwwmwmw
-            {18, "Tochter"}, {19, "Sohn"}, {20, "Tochter deines Schwiegercousins"},
-            {21, "Sohn deines Schwiegercousins"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Urgroßschwiegermutter"}, {1, "Urgroßschwiegervater"}, {2, "Urgroßschwiegermutter"},
-            {3, "Urgroßschwiegervater"}, // wmwm
-            {4, "Großschwiegermutter"}, {5, "Großschwiegervater"}, // wm
-            {6, "Schwiegertante"}, {7, "Schwiegeronkel"}, {8, "Schwiegeronkel"}, {9, "Schwiegermutter"},
-            {10, "Schwiegervater"}, //wmmwm
-            {11, "Schwiegercousin"}, {12, "Schwiegercousine"}, {13, "Schwiegercousine"},
-            {14, "Ehefrau meiner Schwiegercousine"}, {15, "Ich"}, {16, "Ehemann"}, {17, "Schwiegerschwester"}, //mwwmwmw
-            {18, "Tochter deiner Schwiegercousine"}, {19, "Sohn deiner Schwiegercousine"}, {20, "Tochter"},
-            {21, "Sohn"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Urgroßmutter"}, {1, "Urgroßvater"}, {2, "Urgroßmutter"}, {3, "Urgroßvater"}, // wmwm
-            {4, "Großmutter"}, {5, "Großvater"}, // wm
-            {6, "Tante"}, {7, "Onkel"}, {8, "Onkel"}, {9, "Mutter"}, {10, "Vater"}, //wmmwm
-            {11, "Cousin"}, {12, "Cousine"}, {13, "Cousine"}, {14, "Schwiegercousin"}, {15, "Ehefrau"}, {16, "Ich"},
-            {17, "Schwester"}, //mwwmwmw
-            {18, "Nichte 2. Grades"}, {19, "Neffe 2. Grades"}, {20, "Tochter"}, {21, "Sohn"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Urgroßmutter"}, {1, "Urgroßvater"}, {2, "Urgroßmutter"}, {3, "Urgroßvater"}, // wmwm
-            {4, "Großmutter"}, {5, "Großvater"}, // wm
-            {6, "Tante"}, {7, "Onkel"}, {8, "Onkel"}, {9, "Mutter"}, {10, "Vater"}, //wmmwm
-            {11, "Cousin"}, {12, "Cousine"}, {13, "Cousine"}, {14, "Schwiegercousin"}, {15, "Schwiegerschwester"},
-            {16, "Bruder"}, {17, "Ich"}, //mwwmwmw
-            {18, "Nichte 2. Grades"}, {19, "Neffe 2. Grades"}, {20, "Nichte"}, {21, "Neffe"}, //wmwm
-        });
+                break;
+        }
 
-        // 5. Row
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Ururgroßmutter"}, {1, "Ururgroßvater"}, {2, "Ururgroßmutter"}, {3, "Ururgroßvater"}, // wmwm
-            {4, "Urgroßmutter"}, {5, "Urgroßvater"}, // wm
-            {6, "Großmutter"}, {7, "Großvater"}, {8, "Großonkel"}, {9, "Großtante"}, {10, "Großonkel"}, //wmmwm
-            {11, "Onkel"}, {12, "Tante"}, {13, "Mutter"}, {14, "Vater"}, {15, "Tante 3. Grades"},
-            {16, "Onkel 3. Grades"}, {17, "Tante 3. Grades"}, //mwwmwmw
-            {18, "Ich"}, {19, "Bruder"}, {20, "Cousine 3. Grades"}, {21, "Cousin 3. Grades"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Ururgroßmutter"}, {1, "Ururgroßvater"}, {2, "Ururgroßmutter"}, {3, "Ururgroßvater"}, // wmwm
-            {4, "Urgroßmutter"}, {5, "Urgroßvater"}, // wm
-            {6, "Großmutter"}, {7, "Großvater"}, {8, "Großonkel"}, {9, "Großtante"}, {10, "Großonkel"}, //wmmwm
-            {11, "Onkel"}, {12, "Tante"}, {13, "Mutter"}, {14, "Vater"}, {15, "Tante 3. Grades"},
-            {16, "Onkel 3. Grades"}, {17, "Tante 3. Grades"}, //mwwmwmw
-            {18, "Schwester"}, {19, "Ich"}, {20, "Cousine 3. Grades"}, {21, "Cousin 3. Grades"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Ururgroßmutter"}, {1, "Ururgroßvater"}, {2, "Ururgroßmutter"}, {3, "Ururgroßvater"}, // wmwm
-            {4, "Urgroßmutter"}, {5, "Urgroßvater"}, // wm
-            {6, "Großonkel"}, {7, "Großtante"}, {8, "Großonkel"}, {9, "Großmutter"}, {10, "Großvater"}, //wmmwm
-            {11, "Onkel 3. Grades"}, {12, "Tante 3. Grades"}, {13, "Tante 3. Grades"}, {14, "Onkel 3. Grades"},
-            {15, "Mutter"}, {16, "Vater"}, {17, "Tante"}, //mwwmwmw
-            {18, "Cousine 3. Grades"}, {19, "Cousin 3. Grades"}, {20, "Ich"}, {21, "Bruder"}, //wmwm
-        });
-        relativesNames.Add(new Dictionary<int, string>
-        {
-            {0, "Ururgroßmutter"}, {1, "Ururgroßvater"}, {2, "Ururgroßmutter"}, {3, "Ururgroßvater"}, // wmwm
-            {4, "Urgroßmutter"}, {5, "Urgroßvater"}, // wm
-            {6, "Großonkel"}, {7, "Großtante"}, {8, "Großonkel"}, {9, "Großmutter"}, {10, "Großvater"}, //wmmwm
-            {11, "Onkel 3. Grades"}, {12, "Tante 3. Grades"}, {13, "Tante 3. Grades"}, {14, "Onkel 3. Grades"},
-            {15, "Mutter"}, {16, "Vater"}, {17, "Tante"}, //mwwmwmw
-            {18, "Cousine 3. Grades"}, {19, "Cousin 3. Grades"}, {20, "Schwester"}, {21, "Ich"}, //wmwm
-        });
+        return defaultName;
     }
 }
