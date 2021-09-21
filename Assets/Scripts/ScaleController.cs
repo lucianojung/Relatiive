@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ScaleController : MonoBehaviour
 {
-    private float _distance;
+    private float _scaleFactor;
     private float zoomSensitivity = 100.0f;
     private float touchZoomSensitivity = 0.001f;
     private CanvasScaler _canvasScaler;
@@ -15,7 +15,7 @@ public class ScaleController : MonoBehaviour
     void Start()
     {
         _canvasScaler = GetComponent<CanvasScaler>();
-        _distance = _canvasScaler.scaleFactor;
+        _scaleFactor = _canvasScaler.scaleFactor;
     }
 
     // Update is called once per frame
@@ -37,20 +37,21 @@ public class ScaleController : MonoBehaviour
             print(zoomModifier);
             
             if (prevMagnitude > currentMagnitude)
-                _distance -= zoomModifier;
+                _scaleFactor -= zoomModifier;
             if (prevMagnitude < currentMagnitude)
-                _distance += zoomModifier;
+                _scaleFactor += zoomModifier;
         }
         // handle zoom
         if (Input.mouseScrollDelta.y != 0)
         {
             float distance = Input.mouseScrollDelta.y * zoomSensitivity * Time.deltaTime;
-            _distance = distance;
+            _scaleFactor = distance;
         }
     }
 
     private void LateUpdate()
     {
-        _canvasScaler.scaleFactor = _distance;
+        _scaleFactor = Mathf.Clamp(_scaleFactor, 0.5f, 1.5f);
+        _canvasScaler.scaleFactor = _scaleFactor;
     }
 }
