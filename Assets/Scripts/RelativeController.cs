@@ -195,18 +195,27 @@ public class RelativeController : MonoBehaviour
         List<ImageController> childrenToSearch = new List<ImageController>();
         List<ImageController> parentsToSearch = new List<ImageController>();
         List<ImageController> affinitiesToSearch = new List<ImageController>();
-        currentRelative.children.ForEach(child =>
+        
+        currentRelative.Partners.ForEach(partner =>
         {
-            if (child.MarkedDown)
+            if (partner.MarkedDown)
             {
-                string name = GetNameByLevelAndGeneration(child, generation - 1, level + 1, affinity);
-                if (name != defaultName)
+                if (!affinity)
                 {
-                    child.UnselectRelative(name);
-                    childrenToSearch.Add(child);
+                    string name = GetNameByLevelAndGeneration(partner, generation, level, true);
+                    if (name != defaultName)
+                    {
+                        partner.UnselectRelative(name);
+                        affinitiesToSearch.Add(partner);
+                    }
+                }
+                else if (generation == 0)
+                {
+                    partner.UnselectRelative("Schwippschwager");
                 }
             }
         });
+        
         currentRelative.Parents.ForEach(parent =>
         {
             if (parent.MarkedDown)
@@ -219,31 +228,30 @@ public class RelativeController : MonoBehaviour
                 }
             }
         });
-
-        if (!affinity)
+        
+        currentRelative.children.ForEach(child =>
         {
-            currentRelative.Partners.ForEach(partner =>
+            if (child.MarkedDown)
             {
-                if (partner.MarkedDown)
+                string name = GetNameByLevelAndGeneration(child, generation - 1, level + 1, affinity);
+                if (name != defaultName)
                 {
-                    string name = GetNameByLevelAndGeneration(partner, generation, level, true);
-                    if (name != defaultName)
-                    {
-                        partner.UnselectRelative(name);
-                        affinitiesToSearch.Add(partner);
-                    }
+                    child.UnselectRelative(name);
+                    childrenToSearch.Add(child);
                 }
-            });
-        }
+            }
+        });
 
-        childrenToSearch.ForEach((child) =>
-            setRelativesNames(generation - 1, level + 1, child, affinity)
+        affinitiesToSearch.ForEach((parent) =>
+            setRelativesNames(generation, level, parent, true)
         );
+        
         parentsToSearch.ForEach((parent) =>
             setRelativesNames(generation + 1, level + 1, parent, affinity)
         );
-        affinitiesToSearch.ForEach((parent) =>
-            setRelativesNames(generation + 1, level + 1, parent, true)
+        
+        childrenToSearch.ForEach((child) =>
+            setRelativesNames(generation - 1, level + 1, child, affinity)
         );
     }
 
