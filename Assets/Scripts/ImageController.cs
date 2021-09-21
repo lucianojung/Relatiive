@@ -100,7 +100,7 @@ public class ImageController : MonoBehaviour
 
     private void setLineRendererPosition()
     {
-        _lineRenderer.widthMultiplier = 0.1f * _canvasScaler.scaleFactor;
+        _lineRenderer.widthMultiplier = 10.0f * _canvasScaler.scaleFactor;
         
         if (_parents.Count >= 1)
         {

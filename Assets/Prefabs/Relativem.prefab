@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7489b64ff18148c429b7ee13af13abd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: 0
+  sex: 0
   text: {fileID: 5249002012995545300}
   children: []
 --- !u!65 &5771536683387863736
@@ -156,7 +156,7 @@ LineRenderer:
   - {x: -5.4227834, y: 0.40096122, z: 4.99}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.09699964
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
