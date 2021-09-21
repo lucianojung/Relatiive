@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = System.Object;
 
 public class ImageController : MonoBehaviour
 {
@@ -11,13 +12,16 @@ public class ImageController : MonoBehaviour
     public Text text;
     private Image _image;
     private bool markedDown;
+    private CanvasScaler _canvasScaler;
 
     public bool MarkedDown => markedDown;
 
+    // relatives lists
     public List<ImageController> children;
     private List<ImageController> _parents = new List<ImageController>();
     private List<ImageController> _partners = new List<ImageController>();
 
+    #region getter and setter
     public List<ImageController> Parents => _parents;
 
     public List<ImageController> Partners
@@ -25,19 +29,17 @@ public class ImageController : MonoBehaviour
         get => _partners;
         set => _partners = value;
     }
+    #endregion
 
     private void Awake()
     {
         _image = GetComponentInChildren<Image>();
         _lineRenderer = GetComponent<LineRenderer>();
+        _canvasScaler = FindObjectsOfType<CanvasScaler>().First();
     }
 
     void Start()
     {
-        Vector3 averagePosition = Vector3.zero;
-        children.ForEach(child => averagePosition += child.GetPosition());
-        averagePosition /= children.Count;
-
         if (children.Count >= 1)
         {
             setLineRendererPosition();
@@ -61,7 +63,6 @@ public class ImageController : MonoBehaviour
         {
             _parents.ForEach(parent => parent.Partners = _parents.Where(partner => partner != parent).ToList());
         }
-
         setLineRendererPosition();
     }
 
@@ -99,55 +100,56 @@ public class ImageController : MonoBehaviour
 
     private void setLineRendererPosition()
     {
+        _lineRenderer.widthMultiplier = 0.1f * _canvasScaler.scaleFactor;
+        
         if (_parents.Count >= 1)
         {
             Vector3 averageSiblingPosition = Vector3.zero;
-            _parents[0].children.ForEach(siblings => averageSiblingPosition += siblings.GetPosition());
+            _parents[0].children.ForEach(siblings => averageSiblingPosition += siblings.transform.position);
             averageSiblingPosition /= _parents[0].children.Count;
 
-            float yCenterPosition = getCenterYPositionBetweenSiblingsAndParents(_parents[0]);
+            float yCenterPosition = ImageControllerUtils.getCenterYPositionBetweenSiblingsAndParents(_parents[0], this);
             _lineRenderer.SetPosition(0, new Vector3(averageSiblingPosition.x, yCenterPosition));
             _lineRenderer.SetPosition(1, new Vector3(transform.position.x, yCenterPosition));
         }
         else
         {
-            _lineRenderer.SetPosition(0, getPositionAsVector2(transform.position));
-            _lineRenderer.SetPosition(1, getPositionAsVector2(transform.position));
+            _lineRenderer.SetPosition(0, ImageControllerUtils.getPositionAsVector2(transform.position));
+            _lineRenderer.SetPosition(1, ImageControllerUtils.getPositionAsVector2(transform.position));
         }
 
-        _lineRenderer.SetPosition(2, getPositionAsVector2(transform.position));
+        _lineRenderer.SetPosition(2, ImageControllerUtils.getPositionAsVector2(transform.position));
 
         if (children.Count >= 1)
         {
             Vector3 averageChildPosition = Vector3.zero;
-            children.ForEach(child => averageChildPosition += child.GetPosition());
+            children.ForEach(child => averageChildPosition += child.transform.position);
             averageChildPosition /= children.Count;
 
-            float yCenterPosition = getCenterYPositionBetweenSiblingsAndParents(children[0]);
+            float yCenterPosition = ImageControllerUtils.getCenterYPositionBetweenSiblingsAndParents(children[0], this);
             _lineRenderer.SetPosition(3, new Vector3(averageChildPosition.x, transform.position.y));
             _lineRenderer.SetPosition(4, new Vector3(averageChildPosition.x, yCenterPosition));
         }
         else
         {
-            _lineRenderer.SetPosition(3, getPositionAsVector2(transform.position));
-            _lineRenderer.SetPosition(4, getPositionAsVector2(transform.position));
+            _lineRenderer.SetPosition(3, ImageControllerUtils.getPositionAsVector2(transform.position));
+            _lineRenderer.SetPosition(4, ImageControllerUtils.getPositionAsVector2(transform.position));
         }
     }
+}
 
-    private float getCenterYPositionBetweenSiblingsAndParents(ImageController imageController)
-    {
-        return (imageController.GetPosition().y + this.transform.position.y) / 2;
-    }
-
-    public Vector3 GetPosition()
-    {
-        return transform.position;
-    }
-
-    private Vector3 getPositionAsVector2(Vector3 vector)
+class ImageControllerUtils
+{
+    protected internal static Vector3 getPositionAsVector2(Vector3 vector)
     {
         return new Vector3(vector.x, vector.y, 0);
     }
+
+    protected internal static float getCenterYPositionBetweenSiblingsAndParents(ImageController parent, ImageController sibling)
+    {
+        return (parent.transform.position.y + sibling.transform.position.y) / 2;
+    }
+
 }
 
 public enum Sex

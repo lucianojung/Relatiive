@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ScaleController : MonoBehaviour
 {
     private float _scaleFactor;
-    private float zoomSensitivity = 100.0f;
+    private float mouseWheelZoomSensitivity = 7f;
     private float touchZoomSensitivity = 0.001f;
     private CanvasScaler _canvasScaler;
     
@@ -44,8 +44,8 @@ public class ScaleController : MonoBehaviour
         // handle zoom
         if (Input.mouseScrollDelta.y != 0)
         {
-            float distance = Input.mouseScrollDelta.y * zoomSensitivity * Time.deltaTime;
-            _scaleFactor = distance;
+            float distance = Input.mouseScrollDelta.y * mouseWheelZoomSensitivity * Time.deltaTime;
+            _scaleFactor += distance;
         }
     }
 
