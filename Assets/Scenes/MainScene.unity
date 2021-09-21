@@ -601,20 +601,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3435922174595831663, guid: a52320bc67a442b4b94bb6d0ebe7b1bf, type: 3}
       propertyPath: children.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3435922174595831663, guid: a52320bc67a442b4b94bb6d0ebe7b1bf, type: 3}
       propertyPath: children.Array.data[0]
       value: 
-      objectReference: {fileID: 1508140713}
+      objectReference: {fileID: 1194407806}
     - target: {fileID: 3435922174595831663, guid: a52320bc67a442b4b94bb6d0ebe7b1bf, type: 3}
       propertyPath: children.Array.data[1]
       value: 
-      objectReference: {fileID: 1194407806}
+      objectReference: {fileID: 933232745}
     - target: {fileID: 3435922174595831663, guid: a52320bc67a442b4b94bb6d0ebe7b1bf, type: 3}
       propertyPath: children.Array.data[2]
       value: 
-      objectReference: {fileID: 933232745}
+      objectReference: {fileID: 0}
     - target: {fileID: 5249002012752955196, guid: a52320bc67a442b4b94bb6d0ebe7b1bf, type: 3}
       propertyPath: m_Name
       value: Relative_9
@@ -1001,7 +1001,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.764151, g: 0.764151, b: 0.764151, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3295,20 +3295,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3435922174595831663, guid: a52320bc67a442b4b94bb6d0ebe7b1bf, type: 3}
       propertyPath: children.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3435922174595831663, guid: a52320bc67a442b4b94bb6d0ebe7b1bf, type: 3}
       propertyPath: children.Array.data[0]
       value: 
-      objectReference: {fileID: 1508140713}
+      objectReference: {fileID: 1194407806}
     - target: {fileID: 3435922174595831663, guid: a52320bc67a442b4b94bb6d0ebe7b1bf, type: 3}
       propertyPath: children.Array.data[1]
       value: 
-      objectReference: {fileID: 1194407806}
+      objectReference: {fileID: 933232745}
     - target: {fileID: 3435922174595831663, guid: a52320bc67a442b4b94bb6d0ebe7b1bf, type: 3}
       propertyPath: children.Array.data[2]
       value: 
-      objectReference: {fileID: 933232745}
+      objectReference: {fileID: 1508140713}
     - target: {fileID: 5249002012752955196, guid: a52320bc67a442b4b94bb6d0ebe7b1bf, type: 3}
       propertyPath: m_Name
       value: Relative_10

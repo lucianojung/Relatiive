@@ -33,7 +33,7 @@ public class ImageController : MonoBehaviour
         if (children.Count >= 1)
         {
             setLineRendererPosition();
-            
+
             foreach (ImageController child in children)
             {
                 child.SetRelativeParent(this);
@@ -41,10 +41,13 @@ public class ImageController : MonoBehaviour
         }
     }
 
-    public void SetText(string name)
+    public void UnselectRelative(string name)
     {
         text.text = name;
         image.color = new Color(255, 255, 255);
+        
+        lineRenderer.startColor = Color.black;
+        lineRenderer.endColor = Color.black;
     }
 
     public void SetRelativeParent(ImageController parent)
@@ -67,16 +70,17 @@ public class ImageController : MonoBehaviour
             _parents[0].children.ForEach(siblings => averageSiblingPosition += siblings.GetPosition());
             averageSiblingPosition /= _parents[0].children.Count;
 
-            lineRenderer.SetPosition(0, new Vector3(averageSiblingPosition.x, _parents[0].GetPosition().y - 1));
-            lineRenderer.SetPosition(1, new Vector3(transform.position.x, _parents[0].GetPosition().y - 1));
+            float yCenterPosition = getCenterYPositionBetweenSiblingsAndParents(_parents[0]);
+            lineRenderer.SetPosition(0, new Vector3(averageSiblingPosition.x, yCenterPosition));
+            lineRenderer.SetPosition(1, new Vector3(transform.position.x, yCenterPosition));
         }
         else
         {
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, transform.position);
+            lineRenderer.SetPosition(0, getPositionAsVector2(transform.position));
+            lineRenderer.SetPosition(1, getPositionAsVector2(transform.position));
         }
 
-        lineRenderer.SetPosition(2, transform.position);
+        lineRenderer.SetPosition(2, getPositionAsVector2(transform.position));
 
         if (children.Count >= 1)
         {
@@ -84,15 +88,20 @@ public class ImageController : MonoBehaviour
             children.ForEach(child => averageChildPosition += child.GetPosition());
             averageChildPosition /= children.Count;
 
+            float yCenterPosition = getCenterYPositionBetweenSiblingsAndParents(children[0]);
             lineRenderer.SetPosition(3, new Vector3(averageChildPosition.x, transform.position.y));
-            lineRenderer.SetPosition(4, new Vector3(averageChildPosition.x, transform.position.y - 1));
-
+            lineRenderer.SetPosition(4, new Vector3(averageChildPosition.x, yCenterPosition));
         }
         else
         {
-            lineRenderer.SetPosition(3, transform.position);
-            lineRenderer.SetPosition(4, transform.position);
+            lineRenderer.SetPosition(3, getPositionAsVector2(transform.position));
+            lineRenderer.SetPosition(4, getPositionAsVector2(transform.position));
         }
+    }
+
+    private float getCenterYPositionBetweenSiblingsAndParents(ImageController imageController)
+    {
+        return (imageController.GetPosition().y + this.transform.position.y) / 2;
     }
 
     public Vector3 GetPosition()
@@ -103,6 +112,15 @@ public class ImageController : MonoBehaviour
     public void SelectRelative()
     {
         image.color = Color.cyan;
-        lineRenderer.startColor = Color.magenta;
+        
+        // lineRenderer.startColor = Color.magenta;
+        // lineRenderer.endColor = Color.magenta;
+        // children.ForEach(child => child.GetComponent<LineRenderer>().startColor = Color.magenta);
+        // _parents.ForEach(parent => parent.GetComponent<LineRenderer>().endColor = Color.magenta);
+    }
+
+    private Vector3 getPositionAsVector2(Vector3 vector)
+    {
+        return new Vector3(vector.x, vector.y, 0);
     }
 }

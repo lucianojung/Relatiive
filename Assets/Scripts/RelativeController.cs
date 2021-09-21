@@ -52,7 +52,7 @@ public class RelativeController : MonoBehaviour
         Dictionary<int, string> names = relativesNames[imageController.Position];
         foreach (ImageController relative in _relatives)
         {
-            relative.SetText(names[relative.Position]);
+            relative.UnselectRelative(names[relative.Position]);
         }
         
         // highlight tapped button
