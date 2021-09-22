@@ -164,7 +164,6 @@ public class RelativeController : MonoBehaviour
 
         _currentRelative = tappedRelative;
         _currentRelative.SelectRelative(GetNameByLevelAndGeneration(_currentRelative, 0, 0, false));
-        print(_currentRelative.text.text);
         setRelativesNames(0, 0, tappedRelative, false);
     }
 
@@ -189,7 +188,11 @@ public class RelativeController : MonoBehaviour
                 }
                 else if (generation == 0)
                 {
-                    partner.UnselectRelative("Schwippschwager");
+                    string name = _stringDatabase.GetLocalizedString("Schwippschwager");
+                    if (name != _stringDatabase.GetLocalizedString("default"))
+                    {
+                        partner.UnselectRelative(name);
+                    }
                 }
             }
         });
