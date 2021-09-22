@@ -33,7 +33,7 @@ public class ImageController : MonoBehaviour
     
     private void Awake()
     {
-        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer = GetComponentInChildren<LineRenderer>();
         _canvasScaler = FindObjectsOfType<CanvasScaler>().First();
     }
 
@@ -109,15 +109,15 @@ public class ImageController : MonoBehaviour
 
             float yCenterPosition = ImageControllerUtils.getCenterYPositionBetweenSiblingsAndParents(_parents[0], this);
             _lineRenderer.SetPosition(0, new Vector3(averageSiblingPosition.x, yCenterPosition));
-            _lineRenderer.SetPosition(1, new Vector3(transform.position.x, yCenterPosition));
+            _lineRenderer.SetPosition(1, new Vector3(_lineRenderer.gameObject.transform.position.x, yCenterPosition));
         }
         else
         {
-            _lineRenderer.SetPosition(0, ImageControllerUtils.getPositionAsVector2(transform.position));
-            _lineRenderer.SetPosition(1, ImageControllerUtils.getPositionAsVector2(transform.position));
+            _lineRenderer.SetPosition(0, ImageControllerUtils.getPositionAsVector2(_lineRenderer.gameObject.transform.position));
+            _lineRenderer.SetPosition(1, ImageControllerUtils.getPositionAsVector2(_lineRenderer.gameObject.transform.position));
         }
 
-        _lineRenderer.SetPosition(2, ImageControllerUtils.getPositionAsVector2(transform.position));
+        _lineRenderer.SetPosition(2, ImageControllerUtils.getPositionAsVector2(_lineRenderer.gameObject.transform.position));
 
         if (children.Count >= 1)
         {
@@ -126,13 +126,13 @@ public class ImageController : MonoBehaviour
             averageChildPosition /= children.Count;
 
             float yCenterPosition = ImageControllerUtils.getCenterYPositionBetweenSiblingsAndParents(children[0], this);
-            _lineRenderer.SetPosition(3, new Vector3(averageChildPosition.x, transform.position.y));
+            _lineRenderer.SetPosition(3, new Vector3(averageChildPosition.x, _lineRenderer.gameObject.transform.position.y));
             _lineRenderer.SetPosition(4, new Vector3(averageChildPosition.x, yCenterPosition));
         }
         else
         {
-            _lineRenderer.SetPosition(3, ImageControllerUtils.getPositionAsVector2(transform.position));
-            _lineRenderer.SetPosition(4, ImageControllerUtils.getPositionAsVector2(transform.position));
+            _lineRenderer.SetPosition(3, ImageControllerUtils.getPositionAsVector2(_lineRenderer.gameObject.transform.position));
+            _lineRenderer.SetPosition(4, ImageControllerUtils.getPositionAsVector2(_lineRenderer.gameObject.transform.position));
         }
     }
 }
