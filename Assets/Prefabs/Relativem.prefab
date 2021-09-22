@@ -94,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sex: 0
   text: {fileID: 5249002012995545300}
+  _image: {fileID: 5249002012752955198}
   children: []
 --- !u!65 &5771536683387863736
 BoxCollider:
@@ -287,7 +288,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sohn
+  m_Text: Relatiive
 --- !u!1 &5249002014074953535
 GameObject:
   m_ObjectHideFlags: 0

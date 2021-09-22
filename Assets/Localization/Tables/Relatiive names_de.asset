@@ -1,0 +1,378 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Relatiive names_de
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: de
+  m_SharedData: {fileID: 11400000, guid: 58460a3575f9cd44b85455329c8ed952, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 14852583424
+    m_Localized: Ich
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14066043613184
+    m_Localized: Relatiive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16526137126912
+    m_Localized: Bruder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17065168105472
+    m_Localized: Cousin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17203659829248
+    m_Localized: Cousin 2. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17301772988416
+    m_Localized: Cousin 3. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17344248705024
+    m_Localized: Vater
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17527908888576
+    m_Localized: Onkel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17576348905472
+    m_Localized: Onkel 2. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17624344326144
+    m_Localized: Onkel 3. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17698960994304
+    m_Localized: "Gro\xDFvater"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17779789426688
+    m_Localized: "Gro\xDFonkel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17908760080384
+    m_Localized: "Gro\xDFonkel 2. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17947075047424
+    m_Localized: "Gro\xDFonkel 3. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18065832570880
+    m_Localized: "Urgro\xDFvater"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18106248884224
+    m_Localized: "Urgro\xDFonkel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18146203824128
+    m_Localized: "Urgro\xDFonkel 2. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18174955778048
+    m_Localized: "Urgro\xDFonkel 3. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18210204708864
+    m_Localized: "Ururgro\xDFvater"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18269063376896
+    m_Localized: "Ururgro\xDFonkel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18317520171008
+    m_Localized: "Ururgro\xDFonkel 2. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18564505956352
+    m_Localized: "Ururgro\xDFonkel 3. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18600593747968
+    m_Localized: Sohn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18657996992512
+    m_Localized: Neffe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18688367947776
+    m_Localized: Neffe 2. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18726389313536
+    m_Localized: Neffe 3. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18761868931072
+    m_Localized: Neffe 4. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18807746228224
+    m_Localized: Enkel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18836649177088
+    m_Localized: "Gro\xDFneffe"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18867670249472
+    m_Localized: "Gro\xDFneffe 2. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18912566079488
+    m_Localized: "Gro\xDFneffe 3. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18957696790528
+    m_Localized: Urenkel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18997240688640
+    m_Localized: "Urgro\xDFneffe"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19050399297536
+    m_Localized: "Urgro\xDFneffe 2. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19083563659264
+    m_Localized: "Urgro\xDFneffe 3. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19104925249536
+    m_Localized: Ururenkel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19149049327616
+    m_Localized: "Ururgro\xDFneffe"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19184277286912
+    m_Localized: "Ururgro\xDFneffe 2. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19210965643264
+    m_Localized: "Ururgro\xDFneffe 3. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53534549110784
+    m_Localized: '-'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53592199819264
+    m_Localized: Schwester
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53771023970304
+    m_Localized: Cousine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53826770464768
+    m_Localized: Cousine 2. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53843832893440
+    m_Localized: Cousine 3. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53875273396224
+    m_Localized: Mutter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53954872897536
+    m_Localized: Tante
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54034149437440
+    m_Localized: Tante 2. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54060212842496
+    m_Localized: Tante 3. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54095017177088
+    m_Localized: "Gro\xDFmutter"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54150218412032
+    m_Localized: "Gro\xDFtante"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54255692574720
+    m_Localized: "Gro\xDFtante 2. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54266396438528
+    m_Localized: "Gro\xDFtante 3. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54292405317632
+    m_Localized: "Urgro\xDFmutter"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54328648298496
+    m_Localized: "Urgro\xDFtante"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54355265351680
+    m_Localized: "Urgro\xDFtante 2. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54367831486464
+    m_Localized: "Urgro\xDFtante 3. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54402665181184
+    m_Localized: "Ururgro\xDFmutter"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54436043452416
+    m_Localized: "Ururgro\xDFtante"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54476644315136
+    m_Localized: "Ururgro\xDFtante 2. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54487348178944
+    m_Localized: "Ururgro\xDFtante 3. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54910264045568
+    m_Localized: Tochter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54996922560512
+    m_Localized: Nichte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55038379061248
+    m_Localized: Nichte 2. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55050794201088
+    m_Localized: Nichte 3. Grades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55078283669504
+    m_Localized: Enkelin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55183187406848
+    m_Localized: "Gro\xDFnichte"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55195556409344
+    m_Localized: "Gro\xDFnichte 2. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55237948239872
+    m_Localized: "Gro\xDFnichte 3. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55271687221248
+    m_Localized: Urenkelin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55306768379904
+    m_Localized: "Urgro\xDFnichte"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55353698447360
+    m_Localized: "Urgro\xDFnichte 2. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55363253071872
+    m_Localized: "Urgro\xDFnichte 3. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55395733762048
+    m_Localized: Ururenkelin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55418701770752
+    m_Localized: "Ururgro\xDFnichte"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55445620813824
+    m_Localized: "Ururgro\xDFnichte 2. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55455498399744
+    m_Localized: "Ururgro\xDFnichte 3. Grades"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55763154792448
+    m_Localized: '-'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55882126225408
+    m_Localized: Ehefrau
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55899184459776
+    m_Localized: "Schw\xE4gerin"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55927403737088
+    m_Localized: Schwiegermutter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55985427738624
+    m_Localized: "Schwiegergro\xDFmutter"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56135814508544
+    m_Localized: Schwiegertochter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56155578068992
+    m_Localized: Schwiegerenkelin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56283667918848
+    m_Localized: Ehemann
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56316274438144
+    m_Localized: Schwager
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56354241277952
+    m_Localized: Schwiegervater
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56380375986176
+    m_Localized: "Schwiegergro\xDFvater"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56621917564928
+    m_Localized: Schwiegersohn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56651604848640
+    m_Localized: Schwiegerenkel
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1

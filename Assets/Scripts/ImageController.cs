@@ -10,7 +10,7 @@ public class ImageController : MonoBehaviour
     private LineRenderer _lineRenderer;
     public Sex sex;
     public Text text;
-    private Image _image;
+    public Image _image;
     private bool markedDown;
     private CanvasScaler _canvasScaler;
 
@@ -30,10 +30,9 @@ public class ImageController : MonoBehaviour
         set => _partners = value;
     }
     #endregion
-
+    
     private void Awake()
     {
-        _image = GetComponentInChildren<Image>();
         _lineRenderer = GetComponent<LineRenderer>();
         _canvasScaler = FindObjectsOfType<CanvasScaler>().First();
     }
@@ -90,7 +89,7 @@ public class ImageController : MonoBehaviour
 
     public void ResetRelative(string name)
     {
-        text.text = "name";
+        text.text = name;
         _image.color = Color.black;
         markedDown = true;
         
