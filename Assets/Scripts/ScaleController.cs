@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class ScaleController : MonoBehaviour
 {
     private float _scaleFactor;
-    private float mouseWheelZoomSensitivity = 7f;
+    private float mouseWheelZoomSensitivity = 10f;
     private float touchZoomSensitivity = 0.001f;
     private CanvasScaler _canvasScaler;
+    private float minScale = 0.5f;
+    private float maxScale = 5.0f;
     
     // Start is called before the first frame update
     void Start()
@@ -51,7 +53,7 @@ public class ScaleController : MonoBehaviour
 
     private void LateUpdate()
     {
-        _scaleFactor = Mathf.Clamp(_scaleFactor, 0.5f, 1.5f);
+        _scaleFactor = Mathf.Clamp(_scaleFactor, minScale, maxScale);
         _canvasScaler.scaleFactor = _scaleFactor;
     }
 }
