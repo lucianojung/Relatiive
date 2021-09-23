@@ -1,12 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Object = System.Object;
 
 public class ImageController : MonoBehaviour
 {
+    
+    
     private LineRenderer _lineRenderer;
     public Sex sex;
     public Text text;
@@ -68,8 +68,10 @@ public class ImageController : MonoBehaviour
     public void SelectRelative(string name)
     {
         text.text = name;
-        _image.color = Color.cyan;
+        _image.color = ImageControllerUtils.getColorFromHex("#DD9866");
         markedDown = false;
+
+        // transform.position = Camera.main.ScreenToWorldPoint(Vector3.zero);
 
         // lineRenderer.startColor = Color.magenta;
         // lineRenderer.endColor = Color.magenta;
@@ -80,7 +82,7 @@ public class ImageController : MonoBehaviour
     public void UnselectRelative(string name)
     {
         text.text = name;
-        _image.color = new Color(255, 255, 255);
+        _image.color = ImageControllerUtils.getColorFromHex("#EEEDED");
         markedDown = false;
         
         // lineRenderer.startColor = Color.black;
@@ -90,7 +92,7 @@ public class ImageController : MonoBehaviour
     public void ResetRelative(string name)
     {
         text.text = name;
-        _image.color = Color.black;
+        _image.color = ImageControllerUtils.getColorFromHex("#161616");
         markedDown = true;
         
         // lineRenderer.startColor = Color.black;
@@ -99,8 +101,8 @@ public class ImageController : MonoBehaviour
 
     private void setLineRendererPosition()
     {
-        _lineRenderer.widthMultiplier = 10.0f * _canvasScaler.scaleFactor;
-        
+        _lineRenderer.widthMultiplier = 5.0f * _canvasScaler.scaleFactor;
+
         if (_parents.Count >= 1)
         {
             Vector3 averageSiblingPosition = Vector3.zero;
@@ -148,7 +150,13 @@ class ImageControllerUtils
     {
         return (parent.transform.position.y + sibling.transform.position.y) / 2;
     }
-
+    
+    protected internal static Color getColorFromHex(string hex)
+    {
+        Color newColor = Color.white;
+        ColorUtility.TryParseHtmlString(hex, out newColor);
+        return newColor;
+    }
 }
 
 public enum Sex
