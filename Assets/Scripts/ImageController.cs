@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Object = System.Object;
 
 public class ImageController : MonoBehaviour
 {
@@ -33,7 +31,7 @@ public class ImageController : MonoBehaviour
     
     private void Awake()
     {
-        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer = GetComponentInChildren<LineRenderer>();
         _canvasScaler = FindObjectsOfType<CanvasScaler>().First();
     }
 
@@ -68,8 +66,10 @@ public class ImageController : MonoBehaviour
     public void SelectRelative(string name)
     {
         text.text = name;
-        _image.color = Color.cyan;
+        _image.color = ImageControllerUtils.getColorFromHex("#DD9866");
         markedDown = false;
+
+        // transform.position = Camera.main.ScreenToWorldPoint(Vector3.zero);
 
         // lineRenderer.startColor = Color.magenta;
         // lineRenderer.endColor = Color.magenta;
@@ -80,7 +80,7 @@ public class ImageController : MonoBehaviour
     public void UnselectRelative(string name)
     {
         text.text = name;
-        _image.color = new Color(255, 255, 255);
+        _image.color = ImageControllerUtils.getColorFromHex("#EEEDED");
         markedDown = false;
         
         // lineRenderer.startColor = Color.black;
@@ -90,7 +90,7 @@ public class ImageController : MonoBehaviour
     public void ResetRelative(string name)
     {
         text.text = name;
-        _image.color = Color.black;
+        _image.color = ImageControllerUtils.getColorFromHex("#161616");
         markedDown = true;
         
         // lineRenderer.startColor = Color.black;
@@ -99,8 +99,8 @@ public class ImageController : MonoBehaviour
 
     private void setLineRendererPosition()
     {
-        _lineRenderer.widthMultiplier = 10.0f * _canvasScaler.scaleFactor;
-        
+        _lineRenderer.widthMultiplier = 5.0f * _canvasScaler.scaleFactor;
+
         if (_parents.Count >= 1)
         {
             Vector3 averageSiblingPosition = Vector3.zero;
@@ -109,15 +109,15 @@ public class ImageController : MonoBehaviour
 
             float yCenterPosition = ImageControllerUtils.getCenterYPositionBetweenSiblingsAndParents(_parents[0], this);
             _lineRenderer.SetPosition(0, new Vector3(averageSiblingPosition.x, yCenterPosition));
-            _lineRenderer.SetPosition(1, new Vector3(transform.position.x, yCenterPosition));
+            _lineRenderer.SetPosition(1, new Vector3(_lineRenderer.gameObject.transform.position.x, yCenterPosition));
         }
         else
         {
-            _lineRenderer.SetPosition(0, ImageControllerUtils.getPositionAsVector2(transform.position));
-            _lineRenderer.SetPosition(1, ImageControllerUtils.getPositionAsVector2(transform.position));
+            _lineRenderer.SetPosition(0, ImageControllerUtils.getPositionAsVector2(_lineRenderer.gameObject.transform.position));
+            _lineRenderer.SetPosition(1, ImageControllerUtils.getPositionAsVector2(_lineRenderer.gameObject.transform.position));
         }
 
-        _lineRenderer.SetPosition(2, ImageControllerUtils.getPositionAsVector2(transform.position));
+        _lineRenderer.SetPosition(2, ImageControllerUtils.getPositionAsVector2(_lineRenderer.gameObject.transform.position));
 
         if (children.Count >= 1)
         {
@@ -126,13 +126,13 @@ public class ImageController : MonoBehaviour
             averageChildPosition /= children.Count;
 
             float yCenterPosition = ImageControllerUtils.getCenterYPositionBetweenSiblingsAndParents(children[0], this);
-            _lineRenderer.SetPosition(3, new Vector3(averageChildPosition.x, transform.position.y));
+            _lineRenderer.SetPosition(3, new Vector3(averageChildPosition.x, _lineRenderer.gameObject.transform.position.y));
             _lineRenderer.SetPosition(4, new Vector3(averageChildPosition.x, yCenterPosition));
         }
         else
         {
-            _lineRenderer.SetPosition(3, ImageControllerUtils.getPositionAsVector2(transform.position));
-            _lineRenderer.SetPosition(4, ImageControllerUtils.getPositionAsVector2(transform.position));
+            _lineRenderer.SetPosition(3, ImageControllerUtils.getPositionAsVector2(_lineRenderer.gameObject.transform.position));
+            _lineRenderer.SetPosition(4, ImageControllerUtils.getPositionAsVector2(_lineRenderer.gameObject.transform.position));
         }
     }
 }
@@ -148,7 +148,13 @@ class ImageControllerUtils
     {
         return (parent.transform.position.y + sibling.transform.position.y) / 2;
     }
-
+    
+    protected internal static Color getColorFromHex(string hex)
+    {
+        Color newColor = Color.white;
+        ColorUtility.TryParseHtmlString(hex, out newColor);
+        return newColor;
+    }
 }
 
 public enum Sex

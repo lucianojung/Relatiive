@@ -8,6 +8,13 @@ public class LineController : MonoBehaviour
     private LineRenderer _lineRenderer;
     public Transform[] Relatives;
 
+    private void Awake()
+    {
+        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer.positionCount = Relatives.Length;
+        
+    }
+
     private void Start()
     {
         for (int i = 0; i < Relatives.Length; i++)
@@ -17,12 +24,6 @@ public class LineController : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    private void Awake()
-    {
-        _lineRenderer = GetComponent<LineRenderer>();
-        _lineRenderer.positionCount = Relatives.Length;
-        
-    }
 
     private void Update()
     {
