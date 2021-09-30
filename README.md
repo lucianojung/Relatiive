@@ -12,7 +12,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/lucianojung/Relatiive">
-    <img src="Assets/Images/VorstellungsgrafikRelatiive_3.png" alt="Logo" width="512" height="250">
+    <img src="https://raw.githubusercontent.com/lucianojung/Relatiive/main/Assets/Images/VorstellungsgrafikRelatiive.png" alt="Logo" width="512" height="250">
   </a>
 
   <h3 align="center">Relatiive</h3>
@@ -76,7 +76,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![exampleImage](https://user-images.githubusercontent.com/33691403/135501999-7dbdf783-0d0c-4f40-9995-8957c5fa2b36.png)
+
 
 There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
