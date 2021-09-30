@@ -169,9 +169,11 @@ public class RelativeController : MonoBehaviour
 
     private void setRelativesNames(int generation, int level, ImageController currentRelative, bool affinity)
     {
+        // create lists for children, parents and affinities to search
+        // following the order 1. partners/affinities, 2. Parents and children to detect in-law-relationships first
+        List<ImageController> affinitiesToSearch = new List<ImageController>();
         List<ImageController> childrenToSearch = new List<ImageController>();
         List<ImageController> parentsToSearch = new List<ImageController>();
-        List<ImageController> affinitiesToSearch = new List<ImageController>();
 
         currentRelative.Partners.ForEach(partner =>
         {
@@ -179,6 +181,7 @@ public class RelativeController : MonoBehaviour
             {
                 if (!affinity)
                 {
+                    // handle your relatives-in-law
                     string name = GetNameByLevelAndGeneration(partner, generation, level, true);
                     if (name != _stringDatabase.GetLocalizedString("default"))
                     {
@@ -188,6 +191,7 @@ public class RelativeController : MonoBehaviour
                 }
                 else if (generation == 0)
                 {
+                    // in germany the husband of your sister-in-law is called Schwuippschwager
                     string name = _stringDatabase.GetLocalizedString("Schwippschwager");
                     if (name != _stringDatabase.GetLocalizedString("default"))
                     {
@@ -241,7 +245,7 @@ public class RelativeController : MonoBehaviour
         string result = "default";
         switch (relative.sex)
         {
-            case (Sex.MALE):
+            case (Sex.Male):
                 if (!affinity)
                 {
                     if (maleNames.ContainsKey(generation) && maleNames[generation].ContainsKey(level))
@@ -255,7 +259,7 @@ public class RelativeController : MonoBehaviour
 
                 break;
 
-            case (Sex.FEMALE):
+            case (Sex.Female):
                 if (!affinity)
                 {
                     if (femaleNames.ContainsKey(generation) && femaleNames[generation].ContainsKey(level))
@@ -273,4 +277,9 @@ public class RelativeController : MonoBehaviour
 
         return _stringDatabase.GetLocalizedString(result);
     }
+}
+
+public enum Relationship
+{
+    Partner = 0, Parent = 1, Child = 2, ExPartner = 3, AdoptiveParent = 4, AdoptiveChild = 5
 }
