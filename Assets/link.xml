@@ -1,0 +1,5 @@
+﻿
+<linker>
+    <assembly fullname="UnityEngine.ResourceManager.AsyncOperations.ProviderOperation" preserve="all" />
+    <assembly fullname="Unity.Addressables" preserve="all" />
+</linker>

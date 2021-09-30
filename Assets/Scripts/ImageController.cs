@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ImageController : MonoBehaviour
 {
-    
-    
     private LineRenderer _lineRenderer;
     public Sex sex;
     public Text text;
