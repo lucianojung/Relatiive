@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
@@ -9,6 +10,8 @@ public class RelativeController : MonoBehaviour
     private LocalizedStringDatabase _stringDatabase;
 
     private ImageController _currentRelative;
+
+    public ImageController CurrentRelative => _currentRelative;
 
     #region define relative names
 
@@ -283,3 +286,4 @@ public enum Relationship
 {
     Partner = 0, Parent = 1, Child = 2, ExPartner = 3, AdoptiveParent = 4, AdoptiveChild = 5
 }
+

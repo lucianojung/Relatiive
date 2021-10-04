@@ -45,6 +45,9 @@ public class ImageController : MonoBehaviour
             {
                 child.SetRelativeParent(this);
             }
+
+            var relativeController = GetComponentInParent<RelativeController>();
+            relativeController.OnRelativeTapped(relativeController.CurrentRelative);
         }
     }
 
