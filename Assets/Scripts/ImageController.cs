@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ public class ImageController : MonoBehaviour
 {
     private LineRenderer _lineRenderer;
     public Sex sex;
-    public Text text;
+    public TextMeshProUGUI text;
     public Image _image;
     private bool markedDown;
     private CanvasScaler _canvasScaler;
