@@ -15,7 +15,7 @@ MonoBehaviour:
   m_TableCollectionName: localizationAssets
   m_TableCollectionNameGuidString: 2574a94d391c9a64f9015226a6d1ab49
   m_Entries:
-  - m_Id: 19613118464
+  - m_Id: 6205536235520
     m_Key: flag
     m_Metadata:
       m_Items: []
@@ -30,10 +30,11 @@ MonoBehaviour:
       type: {class: AssetTypeMetadata, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
         m_Entries:
-        - m_KeyId: 19613118464
+        - m_KeyId: 6205536235520
           m_TableCodes:
           - en
-        m_TypeString: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+          - de
+        m_TypeString: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
     00000001:
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}

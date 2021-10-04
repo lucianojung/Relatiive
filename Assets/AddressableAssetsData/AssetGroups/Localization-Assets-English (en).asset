@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 2bf23f57dec5e6d438998f539355cfc2
   m_SerializeEntries:
-  - m_GUID: fe90897e246f0a742b724e61ca74014a
-    m_Address: 748050_flag_usa_icon
+  - m_GUID: 92eb5e912b7f6d444bbba61e462f9ddd
+    m_Address: 748067_flag_germany_icon
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
