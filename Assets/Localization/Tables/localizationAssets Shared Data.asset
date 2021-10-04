@@ -16,7 +16,7 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 2574a94d391c9a64f9015226a6d1ab49
   m_Entries:
   - m_Id: 6205536235520
-    m_Key: flag
+    m_Key: flags
     m_Metadata:
       m_Items: []
   m_Metadata:

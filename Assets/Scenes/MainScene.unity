@@ -1259,7 +1259,6 @@ GameObject:
   - component: {fileID: 277332048}
   - component: {fileID: 277332047}
   - component: {fileID: 277332046}
-  - component: {fileID: 277332045}
   - component: {fileID: 277332044}
   m_Layer: 5
   m_Name: Button
@@ -1300,41 +1299,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relativeController: {fileID: 99635106}
---- !u!114 &277332045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277332042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f55fcc3768689a4f9cf863b8c11c618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LocalizedAssetReference:
-    m_TableReference:
-      m_TableCollectionName: GUID:2574a94d391c9a64f9015226a6d1ab49
-    m_TableEntryReference:
-      m_KeyId: 6205536235520
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 1
-  m_UpdateAsset:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 277332047}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-        m_MethodName: set_sprite
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  germanFlag: {fileID: 21300000, guid: f7cbe48015b3ba640984869e1436cd15, type: 3}
+  usaFlag: {fileID: 21300000, guid: f5a0501326e8d46479cc505c69c80517, type: 3}
 --- !u!114 &277332046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1411,7 +1377,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 92eb5e912b7f6d444bbba61e462f9ddd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f7cbe48015b3ba640984869e1436cd15, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
